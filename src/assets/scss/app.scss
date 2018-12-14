@@ -30,7 +30,8 @@
     display: inline-flex;
     align-items: center;
     img {
-      width: 32px;
+      max-width: 32px;
+      flex: 0 0 32px;
       margin-right: 10px;
     }
   }

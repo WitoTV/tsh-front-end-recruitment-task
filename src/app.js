@@ -51,10 +51,9 @@ export class App {
                 <div class="gh-event__action">
                   <div class="gh-event__user">
                     <img width="32" src="${user.avatar_url}"/>
-                    <a href="${user.url}">${user.display_login}</a>
-                    &nbsp;
                   </div>
                   <div class="gh-event__message">
+                    <a href="${user.url}">${user.display_login}</a>
                     ${message}
                   </div>
                 </div>
