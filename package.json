@@ -19,6 +19,7 @@
     "bulma-start": "^0.0.2",
     "bulma-timeline": "^3.0.0",
     "cash-dom": "^2.3.9",
+    "moment": "^2.23.0",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
