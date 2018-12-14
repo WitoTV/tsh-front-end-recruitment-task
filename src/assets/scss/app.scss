@@ -17,3 +17,27 @@
 .timeline .timeline-item {
   padding-bottom:1em;
 }
+
+
+.gh-event {
+  display: flex;
+  flex-direction: column;
+  &__action {
+    display: flex;
+    align-items: center;
+  }
+  &__user {
+    display: inline-flex;
+    align-items: center;
+    img {
+      width: 32px;
+      margin-right: 10px;
+    }
+  }
+  &__message {
+    display: inline-block;
+  }
+  &__repo {
+    margin-top: 5px;
+  }
+}
