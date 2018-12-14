@@ -1,23 +1,26 @@
 import './assets/scss/app.scss';
 import $ from 'cash-dom';
 
-
 export class App {
   initializeApp() {
-    let self = this;
-
-    $('.load-username').on('click', function (e) {
-      let userName = $('.username.input').val();
+    $('.load-username').on('click', () => {
+      const userName = $('.username.input').val();
 
       fetch('https://api.github.com/users/' + userName)
-        .then((response)=> {response.json})
-        .then(function (body) {
-          self.profile = body;
-          self.update_profile();
+        .then((response) => {
+          if (!!response.ok) {
+            return response.json();
+          }
+            throw response.json();
         })
-
-    })
-
+        .then((body) => {
+          this.profile = body;
+          this.update_profile();
+        })
+        .catch((errorPromise) => errorPromise.then((error) => {
+          alert(error.message);
+        }));
+    });
   }
 
   update_profile() {
