@@ -12,13 +12,13 @@
   "author": "",
   "license": "ISC",
   "browserslist": [
-		"last 2 years"
-	],
+    "last 2 years"
+  ],
   "dependencies": {
-    "bulma": "^0.7.1",
+    "bulma": "^0.7.2",
     "bulma-start": "^0.0.2",
-    "bulma-timeline": "^2.0.3",
-    "cash-dom": "^2.1.7"
+    "bulma-timeline": "^3.0.0",
+    "cash-dom": "^2.3.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
