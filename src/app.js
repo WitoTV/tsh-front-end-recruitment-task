@@ -6,6 +6,7 @@ export class App {
   initializeApp() {
     $('.load-username').on('click', () => {
       $('.username.input').removeClass('is-danger');
+      $('#spinner').removeClass('is-hidden');
       const userName = $('.username.input').val();
       const isUserNameValid = (/^[a-zA-Z0-9\-\_]+$/).test(userName);
       if (isUserNameValid) {
@@ -22,6 +23,7 @@ export class App {
         })
         .catch((errorPromise) => errorPromise.then((error) => {
           alert(error.message);
+          $('#spinner').addClass('is-hidden');
         }));
       } else {
         $('.username.input').addClass('is-danger');
@@ -34,6 +36,7 @@ export class App {
     $('#profile-image').attr('src', this.profile.avatar_url);
     $('#profile-url').attr('href', this.profile.html_url).text(this.profile.login);
     $('#profile-bio').text(this.profile.bio || '(no information)');
+    $('.profile-container').removeClass('is-hidden');
     this.load_user_history();
   }
 
@@ -72,6 +75,8 @@ export class App {
     })
     .then((body) => {
       $('#user-timeline').html('');
+      $('#spinner').addClass('is-hidden');
+      $('.events-container').removeClass('is-hidden');
       body.map((event) => {
         switch(event.type) {
           case 'PullRequestEvent': {
@@ -94,7 +99,8 @@ export class App {
       });
     })
     .catch((errorPromise) => errorPromise.then((error) => {
-
+      $('#spinner').addClass('is-hidden');
+      alert('Failed to receive user history, please try again later');
     }))
   }
 }
