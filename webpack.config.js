@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); 
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
 	'context': path.resolve(__dirname, 'src'),
@@ -13,12 +14,12 @@ const config = {
 		'stats': 'errors-only',
 		'open': true
 	},
-	'devtool': 'inline-source-map',
 	'plugins': [
 		new MiniCssExtractPlugin({
 			'filename': 'css/style.css',
 			'chunkFilename': 'css/[name].css'
 		}),
+		new OptimizeCSSAssetsPlugin({}),
 		new HtmlWebpackPlugin({
 			'template': 'index.html',
 			'filename': 'index.html'
@@ -65,8 +66,7 @@ const config = {
 					{
 						'loader': 'css-loader',
 						'options': {
-							'importLoaders': 2,
-							'sourceMap': true
+							'importLoaders': 2
 						}
 					},
 					{
@@ -79,10 +79,7 @@ const config = {
 						}
 					},
 					{
-						'loader': 'sass-loader',
-						'options': {
-							'sourceMap': true
-						}
+						'loader': 'sass-loader'
 					}
 				]
 			},

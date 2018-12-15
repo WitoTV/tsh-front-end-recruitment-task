@@ -1,15 +1,14 @@
 import './assets/scss/app.scss';
 import $ from 'cash-dom';
-import moment from 'moment';
 
 export class App {
   initializeApp() {
     $('.load-username').on('click', () => {
       $('.username.input').removeClass('is-danger');
-      $('#spinner').removeClass('is-hidden');
       const userName = $('.username.input').val();
       const isUserNameValid = (/^[a-zA-Z0-9\-\_]+$/).test(userName);
       if (isUserNameValid) {
+        $('#spinner').removeClass('is-hidden');
         fetch(`https://api.github.com/users/${userName}`)
         .then((response) => {
           if (!!response.ok) {
@@ -21,10 +20,9 @@ export class App {
           this.profile = body;
           this.update_profile();
         })
-        .catch((errorPromise) => errorPromise.then((error) => {
-          alert(error.message);
-          $('#spinner').addClass('is-hidden');
-        }));
+        .catch((error) => {
+            alert('User does not exist or api limit was reached');
+        });
       } else {
         $('.username.input').addClass('is-danger');
       }
@@ -45,7 +43,7 @@ export class App {
       `<div class="timeline-item ${type && type}">
           <div class="timeline-marker ${type && type}"></div>
           <div class="timeline-content">
-            <p class="heading">${moment(date).format('ll')}</p>
+            <p class="heading">${date}</p>
             <div class="content">
               <div class="gh-event">
                 <div class="gh-event__action">
@@ -83,7 +81,8 @@ export class App {
             const message = (
               `${payload.action} <a href="${payload.pull_request.html_url}">pull request</a>`
             );
-            $('#user-timeline').append(template(actor, false, message, created_at, repo))
+            const date = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(created_at));
+            $('#user-timeline').append(template(actor, false, message, date, repo))
             break;
           }
           case 'PullRequestReviewCommentEvent': {
@@ -91,15 +90,16 @@ export class App {
             const message = (
               `created <a href="${payload.comment.html_url}">comment</a> to <a href="${payload.pull_request.html_url}">pull request</a>`
             );
-            $('#user-timeline').append(template(actor, 'is-primary', message, created_at, repo))
+            const date = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(created_at));
+            $('#user-timeline').append(template(actor, 'is-primary', message, date, repo))
             break;
           }
         }
       });
     })
-    .catch((errorPromise) => errorPromise.then((error) => {
-      $('#spinner').addClass('is-hidden');
-      alert('Failed to receive user history, please try again later');
-    }))
+    .catch((error) => {
+        $('#spinner').addClass('is-hidden');
+        alert('Failed to receive user history, please try again later');
+    });
   }
 }
