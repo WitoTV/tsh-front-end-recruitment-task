@@ -53,12 +53,12 @@ export class App {
                     <img width="32" src="${user.avatar_url}"/>
                   </div>
                   <div class="gh-event__message">
-                    <a href="${user.url}">${user.display_login}</a>
+                    <a href="${this.profile.html_url}">${user.display_login}</a>
                     ${message}
                   </div>
                 </div>
                 <div class="gh-event__repo">
-                  <a href="${repo.url}">${repo.name}</a>
+                  <a href="https://github.com/${repo.name.toLowerCase()}">${repo.name}</a>
                 </div>
               </div>
             </div>
@@ -81,7 +81,7 @@ export class App {
           case 'PullRequestEvent': {
             const {repo, payload, actor, created_at} = event;
             const message = (
-              `${payload.action} <a href="${payload.pull_request.url}">pull request</a>`
+              `${payload.action} <a href="${payload.pull_request.html_url}">pull request</a>`
             );
             $('#user-timeline').append(template(actor, false, message, created_at, repo))
             break;
@@ -89,7 +89,7 @@ export class App {
           case 'PullRequestReviewCommentEvent': {
             const {repo, payload, actor, created_at} = event;
             const message = (
-              `created <a href="${payload.comment.url}">comment</a> to <a href="${payload.pull_request.url}">pull request</a>`
+              `created <a href="${payload.comment.html_url}">comment</a> to <a href="${payload.pull_request.html_url}">pull request</a>`
             );
             $('#user-timeline').append(template(actor, 'is-primary', message, created_at, repo))
             break;
