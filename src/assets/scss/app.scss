@@ -1,0 +1,44 @@
+@import "~bulma";
+@import "~bulma-timeline";
+
+.navbar {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+}
+
+.gh-username img{
+  width: 32px;
+}
+
+#profile-bio{
+  margin-top:10px;
+}
+
+.timeline .timeline-item {
+  padding-bottom:1em;
+}
+
+
+.gh-event {
+  display: flex;
+  flex-direction: column;
+  &__action {
+    display: flex;
+    align-items: center;
+  }
+  &__user {
+    display: inline-flex;
+    align-items: center;
+    img {
+      max-width: 32px;
+      flex: 0 0 32px;
+      margin-right: 10px;
+    }
+  }
+  &__message {
+    display: inline-block;
+  }
+  &__repo {
+    margin-top: 5px;
+  }
+}

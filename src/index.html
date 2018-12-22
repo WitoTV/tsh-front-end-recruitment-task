@@ -1,0 +1,63 @@
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Github-browser</title>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-item">
+      <div class="field has-addons">
+        <div class="control">
+          <input class="input username" type="text" placeholder="Enter github username">
+        </div>
+        <div class="control">
+          <button class="button is-info load-username">
+            Load
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-item">
+      <div class="loader is-hidden" id="spinner"></div>
+    </div>
+
+  </div>
+</nav>
+
+<div class="section">
+  <div class="container">
+    <div class="columns is-1-tablet">
+      <div class="profile-container is-hidden column is-half-tablet is-one-third-widescreen">
+        <h2 class="subtitle is-4">Profile</h2>
+        <div class="profile">
+          <div class="media">
+            <div class="media-left">
+              <figure class="media-left image is-64x64">
+                <img src="" id="profile-image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-5" id="profile-name"></p>
+              <p class="subtitle is-6"><a href="#" id="profile-url"></a></p>
+            </div>
+          </div>
+          <div class="content" id="profile-bio">
+          </div>
+        </div>
+      </div>
+
+      <div class="events-container is-hidden column">
+        <h2 class="subtitle is-4">History</h2>
+
+        <div class="timeline" id="user-timeline">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
